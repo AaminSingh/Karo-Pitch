@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karo Pitch – Investors</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --ink: #0a0a0f; --saffron: #FF6B00; --saffron-light: #FF8C33; --gold: #E8A000; --green: #00875A; --cream: #fdf8f0; --muted: #6b6560; --border: rgba(10,10,15,0.12); --section-alt: #0a0a0f; }
+  body { font-family: 'Instrument Sans', sans-serif; background: var(--section-alt); color: #fff; overflow-x: hidden; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 5%; background: rgba(10,10,15,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-badge { width: 38px; height: 38px; border-radius: 10px; background: var(--saffron); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 16px; }
+  .logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; color: #fff; }
+  .logo-text span { color: var(--saffron); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links li a { text-decoration: none; font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.7); display: inline-block; overflow: hidden; height: 1.3em; vertical-align: bottom; }
+  .nav-links li a .link-inner { display: flex; flex-direction: column; transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); }
+  .nav-links li a .link-inner span { display: block; line-height: 1.3em; white-space: nowrap; }
+  .nav-links li a .link-inner span:nth-child(2) { color: var(--saffron); font-weight: 600; }
+  .nav-links li a:hover .link-inner { transform: translateY(-1.3em); }
+  .nav-links li a.active .link-inner span:first-child { color: var(--saffron); font-weight: 700; }
+  .nav-cta { background: var(--saffron); color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Instrument Sans', sans-serif; text-decoration: none; transition: background .2s, transform .15s; display: inline-block; }
+  .nav-cta:hover { background: var(--saffron-light); transform: translateY(-1px); }
+
+  .section-label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--saffron); margin-bottom: 16px; }
+
+  /* PAGE HERO */
+  .page-hero { padding: 140px 5% 80px; position: relative; overflow: hidden; }
+  .page-hero::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 70% 60% at 80% 40%, rgba(255,107,0,0.12) 0%, transparent 60%); }
+  .page-hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(38px,5.5vw,68px); font-weight: 800; letter-spacing: -2px; color: #fff; line-height: 1.07; max-width: 700px; position: relative; animation: fadeUp .8s ease both; }
+  .page-hero p { font-size: 18px; color: rgba(255,255,255,0.55); max-width: 560px; margin-top: 20px; line-height: 1.7; position: relative; animation: fadeUp .8s .15s ease both; }
+
+  /* INVESTOR GRID */
+  .investors-section { padding: 80px 5%; flex: 1; }
+  .investor-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .investor-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 30px 26px; transition: background .2s, transform .25s, border-color .2s; position: relative; overflow: hidden; }
+  .investor-card::before { content:''; position:absolute; inset:0; border-radius:18px; background: linear-gradient(135deg, rgba(255,107,0,0.06) 0%, transparent 50%); opacity:0; transition:opacity .3s; }
+  .investor-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-5px); border-color: rgba(255,107,0,0.25); }
+  .investor-card:hover::before { opacity:1; }
+  .inv-avatar { width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 26px; position: relative; }
+  .inv-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 17px; color: #fff; text-align: center; margin-bottom: 4px; }
+  .inv-title { font-size: 13px; color: rgba(255,255,255,0.45); text-align: center; margin-bottom: 16px; }
+  .inv-focus { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 16px; }
+  .focus-tag { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 100px; background: rgba(255,107,0,0.15); color: var(--saffron-light); }
+  .inv-bio { font-size: 13px; color: rgba(255,255,255,0.45); text-align: center; line-height: 1.55; }
+
+  /* WHY SECTION */
+  .why-section { padding: 80px 5%; background: rgba(255,255,255,0.02); border-top: 1px solid rgba(255,255,255,0.06); }
+  .why-inner { max-width: 1000px; margin: 0 auto; }
+  .why-inner h2 { font-family: 'Syne', sans-serif; font-size: clamp(28px,3.5vw,42px); font-weight: 800; letter-spacing: -1.5px; color: #fff; text-align: center; margin-bottom: 48px; }
+  .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+  .why-card { padding: 26px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; transition: background .2s; }
+  .why-card:hover { background: rgba(255,255,255,0.06); }
+  .why-icon { font-size: 28px; margin-bottom: 12px; }
+  .why-card h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 16px; color: #fff; margin-bottom: 8px; }
+  .why-card p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+  /* PARTNER CTA */
+  .partner-cta { padding: 80px 5%; text-align: center; }
+  .partner-cta h2 { font-family: 'Syne', sans-serif; font-size: clamp(28px,4vw,48px); font-weight: 800; letter-spacing: -1.5px; color: #fff; margin-bottom: 16px; }
+  .partner-cta p { font-size: 17px; color: rgba(255,255,255,0.55); max-width: 480px; margin: 0 auto 36px; }
+  .btn-saffron { background: var(--saffron); color: #fff; border: none; padding: 15px 32px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: 'Instrument Sans', sans-serif; transition: transform .2s, box-shadow .2s; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(255,107,0,0.3); }
+  .btn-saffron:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,107,0,0.45); }
+  .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.2); padding: 15px 32px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: 'Instrument Sans', sans-serif; transition: border-color .2s, transform .2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.6); transform: translateY(-2px); }
+
+  footer { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.4); padding: 36px 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
+  footer .footer-logo { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; font-size: 16px; }
+  footer .footer-logo span { color: var(--saffron); }
+  footer .footer-links { display: flex; gap: 24px; }
+  footer .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color .2s; }
+  footer .footer-links a:hover { color: #fff; }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+  @media(max-width:900px){ .nav-links{display:none} .investor-grid,.why-grid{grid-template-columns:1fr 1fr} }
+  @media(max-width:600px){ .investor-grid,.why-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-badge">KP</div>
+    <span class="logo-text">Karo<span>Pitch</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html"><span class="link-inner"><span>Home</span><span>Home</span></span></a></li>
+    <li><a href="about.html"><span class="link-inner"><span>About</span><span>About</span></span></a></li>
+    <li><a href="startups.html"><span class="link-inner"><span>Startups</span><span>Startups</span></span></a></li>
+    <li><a href="investors.html" class="active"><span class="link-inner"><span>Investors</span><span>Investors</span></span></a></li>
+    <li><a href="apply.html"><span class="link-inner"><span>Apply</span><span>Apply</span></span></a></li>
+  </ul>
+  <a class="nav-cta" href="apply.html">Apply to Pitch →</a>
+</nav>
+
+<div style="flex:1">
+  <section class="page-hero">
+    <div class="section-label">Investor Network</div>
+    <h1>Meet Investors Looking for the Next Big Startup.</h1>
+    <p>Karo Pitch brings together India's most active angels, family offices, and early-stage VCs actively deploying capital into Bharat's best founders.</p>
+  </section>
+
+  <section class="investors-section">
+    <div class="investor-grid">
+      <div class="investor-card">
+        <div class="inv-avatar" style="background:linear-gradient(135deg,#FF6B00,#E8A000)">👨‍💼</div>
+        <div class="inv-name">Rahul Mehta</div>
+        <div class="inv-title">Partner · Bharat Ventures</div>
+        <div class="inv-focus"><span class="focus-tag">D2C</span><span class="focus-tag">Consumer</span><span class="focus-tag">FMCG</span></div>
+        <div class="inv-bio">15+ years backing consumer brands. Invested in 40+ D2C companies across Tier-2 India with 3 exits.</div>
+      </div>
+      <div class="investor-card">
+        <div class="inv-avatar" style="background:linear-gradient(135deg,#7733cc,#5555bb)">👩‍💼</div>
+        <div class="inv-name">Priya Nair</div>
+        <div class="inv-title">Managing Partner · SeedIndia Fund</div>
+        <div class="inv-focus"><span class="focus-tag">SaaS</span><span class="focus-tag">Fintech</span><span class="focus-tag">B2B</span></div>
+        <div class="inv-bio">Ex-McKinsey. Leads seed investments in B2B SaaS and fintech. Backed 25+ startups across India.</div>
+      </div>
+      <div class="investor-card">
+        <div class="inv-avatar" style="background:linear-gradient(135deg,#00875A,#00b377)">🧑‍💼</div>
+        <div class="inv-name">Vikram Singh</div>
+        <div class="inv-title">MD · GrowthX Capital</div>
+        <div class="inv-focus"><span class="focus-tag">Manufacturing</span><span class="focus-tag">AgriTech</span><span class="focus-tag">Bharat</span></div>
+        <div class="inv-bio">Bharat-focused investor deploying capital into manufacturing and agritech. ₹200Cr+ deployed across 30 startups.</div>
+      </div>
+      <div class="investor-card">
+        <div class="inv-avatar" style="background:linear-gradient(135deg,#cc2222,#ff4444)">👩‍💻</div>
+        <div class="inv-name">Deepa Iyer</div>
+        <div class="inv-title">Angel Investor · Nasscom Mentor</div>
+        <div class="inv-focus"><span class="focus-tag">HealthTech</span><span class="focus-tag">EdTech</span><span class="focus-tag">Impact</span></div>
+        <div class="inv-bio">Social impact investor and operator. Ex-Practo. Focuses on health and education tech solving Bharat's problems.</div>
+      </div>
+      <div class="investor-card">
+        <div class="inv-avatar" style="background:linear-gradient(135deg,#E8A000,#ffcc44)">🧔</div>
+        <div class="inv-name">Arjun Kapoor</div>
+        <div class="inv-title">Family Office · Kapoor Investments</div>
+        <div class="inv-focus"><span class="focus-tag">MSME</span><span class="focus-tag">Logistics</span><span class="focus-tag">Infra</span></div>
+        <div class="inv-bio">Third-generation family office investing in traditional industries being disrupted by technology. ₹500Cr+ AUM.</div>
+      </div>
+      <div class="investor-card">
+        <div class="inv-avatar" style="background:linear-gradient(135deg,#0066cc,#3399ff)">👨‍🔬</div>
+        <div class="inv-name">Sanjay Bose</div>
+        <div class="inv-title">GP · IndiaTech Ventures</div>
+        <div class="inv-focus"><span class="focus-tag">DeepTech</span><span class="focus-tag">IoT</span><span class="focus-tag">AI/ML</span></div>
+        <div class="inv-bio">IIT Bombay alumni. Backs deep tech founders with proprietary IP. Previously built and exited two startups.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-section">
+    <div class="why-inner">
+      <h2>Why Invest Through Karo Pitch?</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🔍</div>
+          <h3>Curated Deal Flow</h3>
+          <p>Every startup is pre-screened by our team. You only see investor-ready founders with real traction and clear business models.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">🌏</div>
+          <h3>Bharat Access</h3>
+          <p>Access to founders from Tier-2 and Tier-3 cities building real businesses — markets most investors haven't explored yet.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <h3>Structured Pitches</h3>
+          <p>No cold outreach. Pre-scheduled, structured pitch sessions give you complete information in a focused format.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partner-cta">
+    <div class="section-label" style="text-align:center">Partner With Us</div>
+    <h2>Ready to Discover<br>Bharat's Next Unicorn?</h2>
+    <p>Join our investor network and get early access to India's most promising early-stage startups.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="apply.html" class="btn-saffron">Join as Investor →</a>
+      <a href="mailto:business@karostartup.com" class="btn-outline">Contact Us</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-logo">Karo<span>Pitch</span> by KaroStartup</div>
+  <div class="footer-links">
+    <a href="https://karostartup.com" target="_blank">KaroStartup.com</a>
+    <a href="https://instagram.com/karopitch" target="_blank">Instagram</a>
+    <a href="apply.html">Apply</a>
+  </div>
+  <div>© 2025 KaroStartup. All rights reserved.</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.investor-card, .why-card').forEach((el,i) => {
+    el.style.opacity='0'; el.style.transform='translateY(18px)';
+    el.style.transition=`opacity .45s ${i*.08}s ease, transform .45s ${i*.08}s ease`;
+    new IntersectionObserver(([e])=>{ if(e.isIntersecting){el.style.opacity='1';el.style.transform='translateY(0)'} },{threshold:.1}).observe(el);
+  });
+</script>
+</body>
+</html>

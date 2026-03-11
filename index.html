@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karo Pitch – Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #0a0a0f; --saffron: #FF6B00; --saffron-light: #FF8C33;
+    --gold: #E8A000; --green: #00875A; --cream: #fdf8f0;
+    --muted: #6b6560; --border: rgba(10,10,15,0.12); --section-alt: #0a0a0f;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Instrument Sans', sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 5%; background: rgba(245,240,232,0.92); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-badge { width: 38px; height: 38px; border-radius: 10px; background: var(--saffron); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; color: #fff; font-size: 16px; }
+  .logo-text { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; color: var(--ink); }
+  .logo-text span { color: var(--saffron); }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links li a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--ink); display: inline-block; overflow: hidden; height: 1.3em; vertical-align: bottom; position: relative; }
+  .nav-links li a .link-inner { display: flex; flex-direction: column; transition: transform 0.35s cubic-bezier(0.76, 0, 0.24, 1); }
+  .nav-links li a .link-inner span { display: block; line-height: 1.3em; white-space: nowrap; }
+  .nav-links li a .link-inner span:nth-child(2) { color: var(--saffron); font-weight: 600; }
+  .nav-links li a:hover .link-inner { transform: translateY(-1.3em); }
+  .nav-links li a.active .link-inner span:first-child { color: var(--saffron); font-weight: 700; }
+  .nav-cta { background: var(--ink); color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Instrument Sans', sans-serif; text-decoration: none; transition: background .2s, transform .15s; display: inline-block; }
+  .nav-cta:hover { background: var(--saffron); transform: translateY(-1px); }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 5% 80px; position: relative; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(255,107,0,0.08) 0%, transparent 65%), radial-gradient(ellipse 50% 50% at 20% 80%, rgba(232,160,0,0.06) 0%, transparent 60%); }
+  .hero-grid { position: absolute; inset: 0; z-index: 0; background-image: linear-gradient(rgba(10,10,15,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(10,10,15,0.04) 1px, transparent 1px); background-size: 60px 60px; }
+  .hero-content { position: relative; z-index: 1; max-width: 680px; animation: fadeUp .9s ease both; }
+  .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,107,0,0.1); border: 1px solid rgba(255,107,0,0.25); border-radius: 100px; padding: 6px 14px; font-size: 13px; font-weight: 600; color: var(--saffron); margin-bottom: 24px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--saffron); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(40px,6.5vw,76px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; color: var(--ink); margin-bottom: 24px; }
+  .hero h1 .accent { color: var(--saffron); }
+  .hero p { font-size: clamp(16px,2vw,19px); color: var(--muted); max-width: 520px; margin-bottom: 40px; line-height: 1.65; }
+  .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--saffron); color: #fff; border: none; padding: 15px 30px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: 'Instrument Sans', sans-serif; transition: transform .2s, box-shadow .2s; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(255,107,0,0.3); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,107,0,0.4); }
+  .btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--border); padding: 15px 30px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: 'Instrument Sans', sans-serif; transition: transform .2s, border-color .2s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-secondary:hover { border-color: var(--ink); transform: translateY(-2px); }
+  .hero-stats { display: flex; gap: 36px; margin-top: 56px; flex-wrap: wrap; }
+  .stat { border-left: 3px solid var(--saffron); padding-left: 14px; }
+  .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 28px; color: var(--ink); line-height: 1; }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* HERO CARDS */
+  .hero-visual { position: absolute; right: 4%; top: 50%; transform: translateY(-50%); width: min(380px, 34%); display: flex; flex-direction: column; gap: 14px; animation: fadeUp .9s .2s ease both; z-index: 1; }
+  .pitch-card { background: #fff; border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.06); transition: transform .3s; }
+  .pitch-card:hover { transform: translateY(-4px); }
+  .pitch-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .startup-avatar { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .startup-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; }
+  .startup-tag { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 100px; display: inline-block; margin-top: 2px; }
+  .tag-d2c { background: rgba(0,135,90,0.1); color: var(--green); }
+  .tag-saas { background: rgba(255,107,0,0.1); color: var(--saffron); }
+  .tag-msme { background: rgba(232,160,0,0.1); color: var(--gold); }
+  .pitch-card p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .pitch-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+  .funding-ask { font-size: 11px; color: var(--muted); }
+  .funding-ask strong { color: var(--ink); font-size: 13px; }
+  .status-badge { font-size: 10px; font-weight: 600; padding: 3px 9px; border-radius: 100px; }
+  .status-live { background: rgba(0,135,90,0.1); color: var(--green); }
+  .status-shortlisted { background: rgba(255,107,0,0.1); color: var(--saffron); }
+
+  /* HOW IT WORKS STRIP */
+  .how-strip { padding: 80px 5%; background: var(--section-alt); }
+  .how-strip h2 { font-family: 'Syne', sans-serif; font-size: clamp(28px,3.5vw,42px); font-weight: 800; letter-spacing: -1.5px; color: #fff; text-align: center; margin-bottom: 48px; }
+  .steps { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(4,1fr); gap: 0; position: relative; }
+  .steps::before { content:''; position:absolute; top:36px; left:12%; right:12%; height:2px; background: repeating-linear-gradient(90deg,var(--saffron) 0,var(--saffron) 10px,transparent 10px,transparent 20px); }
+  .step { text-align: center; padding: 0 16px; position: relative; z-index:1; }
+  .step-num { width: 48px; height: 48px; border-radius: 50%; background: var(--saffron); color: #fff; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; transition: transform .3s; }
+  .step:hover .step-num { transform: scale(1.15); background: #fff; color: var(--saffron); }
+  .step h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 14px; color: #fff; margin-bottom: 6px; }
+  .step p { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .step-icon { font-size: 22px; display: block; margin-bottom: 6px; }
+
+  /* MINI CTA */
+  .mini-cta { padding: 80px 5%; text-align: center; background: var(--cream); }
+  .mini-cta h2 { font-family: 'Syne', sans-serif; font-size: clamp(28px,4vw,48px); font-weight: 800; letter-spacing: -1.5px; color: var(--ink); margin-bottom: 16px; }
+  .mini-cta p { font-size: 17px; color: var(--muted); max-width: 480px; margin: 0 auto 36px; }
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: rgba(255,255,255,0.5); padding: 36px 5%; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; font-size: 14px; margin-top: auto; }
+  footer .footer-logo { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; font-size: 16px; }
+  footer .footer-logo span { color: var(--saffron); }
+  footer .footer-links { display: flex; gap: 24px; }
+  footer .footer-links a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color .2s; }
+  footer .footer-links a:hover { color: #fff; }
+
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  @media(max-width:900px){ .nav-links{display:none} .hero-visual{display:none} .steps{grid-template-columns:1fr 1fr} .steps::before{display:none} }
+  @media(max-width:600px){ .steps{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <div class="logo-badge">KP</div>
+    <span class="logo-text">Karo<span>Pitch</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active"><span class="link-inner"><span>Home</span><span>Home</span></span></a></li>
+    <li><a href="about.html"><span class="link-inner"><span>About</span><span>About</span></span></a></li>
+    <li><a href="startups.html"><span class="link-inner"><span>Startups</span><span>Startups</span></span></a></li>
+    <li><a href="investors.html"><span class="link-inner"><span>Investors</span><span>Investors</span></span></a></li>
+    <li><a href="apply.html"><span class="link-inner"><span>Apply</span><span>Apply</span></span></a></li>
+  </ul>
+  <a class="nav-cta" href="apply.html">Apply to Pitch →</a>
+</nav>
+
+<div style="flex:1">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow"><span class="dot"></span> India's Startup Pitch Platform</div>
+      <h1>Pitch Your Startup to India's <span class="accent">Top Investors.</span></h1>
+      <p>Karo Pitch is a platform where founders from across India — especially from Tier-2, Tier-3 cities and Bharat — can pitch their businesses directly to investors and raise funding.</p>
+      <div class="hero-buttons">
+        <a href="apply.html" class="btn-primary">Apply to Pitch →</a>
+        <a href="startups.html" class="btn-secondary">Explore Startups</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">5,000+</div><div class="stat-label">Founder Stories</div></div>
+        <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Active Investors</div></div>
+        <div class="stat"><div class="stat-num">28</div><div class="stat-label">States Represented</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="pitch-card">
+        <div class="pitch-card-header">
+          <div class="startup-avatar" style="background:#fff3e0">🛍️</div>
+          <div><div class="startup-name">Dhara Naturals</div><span class="startup-tag tag-d2c">D2C Brand</span></div>
+        </div>
+        <p>Organic skincare from Rajasthan. 40% repeat customers, ₹80L ARR.</p>
+        <div class="pitch-card-footer"><div class="funding-ask">Seeking <strong>₹50L</strong></div><span class="status-badge status-live">🟢 Live</span></div>
+      </div>
+      <div class="pitch-card">
+        <div class="pitch-card-header">
+          <div class="startup-avatar" style="background:#e8f5e9">⚙️</div>
+          <div><div class="startup-name">KrishiTech</div><span class="startup-tag tag-saas">AgriTech</span></div>
+        </div>
+        <p>Farm SaaS helping 5,000+ MP farmers with AI crop insights.</p>
+        <div class="pitch-card-footer"><div class="funding-ask">Seeking <strong>₹1.2Cr</strong></div><span class="status-badge status-shortlisted">🔶 Shortlisted</span></div>
+      </div>
+      <div class="pitch-card">
+        <div class="pitch-card-header">
+          <div class="startup-avatar" style="background:#fff8e1">🏭</div>
+          <div><div class="startup-name">Shakti Forge</div><span class="startup-tag tag-msme">Manufacturing</span></div>
+        </div>
+        <p>Auto-component MSME from Pune, eyeing SE Asia exports.</p>
+        <div class="pitch-card-footer"><div class="funding-ask">Seeking <strong>₹2Cr</strong></div><span class="status-badge status-shortlisted">🔶 Shortlisted</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-strip">
+    <h2>How Karo Pitch Works</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><span class="step-icon">📋</span><h3>Apply</h3><p>Submit your startup profile and pitch deck.</p></div>
+      <div class="step"><div class="step-num">02</div><span class="step-icon">✅</span><h3>Get Shortlisted</h3><p>Our team reviews and selects investor-ready startups.</p></div>
+      <div class="step"><div class="step-num">03</div><span class="step-icon">🎤</span><h3>Pitch Live</h3><p>Present in front of active investors and angels.</p></div>
+      <div class="step"><div class="step-num">04</div><span class="step-icon">🚀</span><h3>Raise & Scale</h3><p>Close deals and build with the right support.</p></div>
+    </div>
+  </section>
+
+  <!-- MINI CTA -->
+  <section class="mini-cta">
+    <h2>Ready to Pitch Your Startup?</h2>
+    <p>Join hundreds of Bharat founders getting investor-ready on Karo Pitch.</p>
+    <div class="cta-buttons">
+      <a href="apply.html" class="btn-primary">Apply Now →</a>
+      <a href="about.html" class="btn-secondary">Learn More</a>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-logo">Karo<span>Pitch</span> by KaroStartup</div>
+  <div class="footer-links">
+    <a href="https://karostartup.com" target="_blank">KaroStartup.com</a>
+    <a href="https://instagram.com/karopitch" target="_blank">Instagram</a>
+    <a href="apply.html">Apply</a>
+  </div>
+  <div>© 2025 KaroStartup. All rights reserved.</div>
+</footer>
+
+<script>
+  document.querySelectorAll('.step').forEach((el,i) => {
+    el.style.opacity='0'; el.style.transform='translateY(20px)';
+    el.style.transition=`opacity .5s ${i*.1}s ease, transform .5s ${i*.1}s ease`;
+    new IntersectionObserver(([e])=>{ if(e.isIntersecting){el.style.opacity='1';el.style.transform='translateY(0)'} },{threshold:.1}).observe(el);
+  });
+</script>
+</body>
+</html>
